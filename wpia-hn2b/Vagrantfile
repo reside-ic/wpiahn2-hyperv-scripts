@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+
+box = "generic/ubuntu2204"
+ram = "16384"
+hostname = "wpia-hn2b"
+mac = "00:15:5d:b1:1e:01"
+cpus = 4
+
+Vagrant.configure(2) do |config|
+  config.vm.box = box
+  config.vm.network "public_network", bridge: "External Switch", auto_config: true
+  config.vm.provider :hyperv do |hyperv|
+    hyperv.mac = mac
+    hyperv.vmname = hostname
+    hyperv.cpus = cpus
+    hyperv.maxmemory = ram
+    hyperv.memory = ram
+    hyperv.auto_start_action = "StartIfRunning"
+    hyperv.auto_stop_action = "Save"
+  end
+  config.vm.hostname = hostname
+  config.vm.provision :shell, path: "../common/setup.sh",
+		                                  env: {"hostname" => hostname}
+  config.vm.provision :shell, path: "../common/setup-docker.sh"
+  config.vm.provision :shell, path: "../common/setup-ssh-keys.sh", run: "always",
+                              args: ["richfitz", "weshinsley", "plietar"]
+end
