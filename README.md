@@ -37,15 +37,16 @@ the MAC addresses will be in the form `00:15:5d:b1:1e:xx`.  existing so far:-
 
 | Machine                 | Cores | RAM | Disk | MAC | IP        |
 |-------------------------|-------|-----|------|-----|-----------|
-| wpia-hn2b               |   4   | 16  | 16Tb | 01  | dide      |
+| wpia-hn2b               |   4   | 64  | 16Tb | 01  | dide      |
+| wpia-modules            |   8   | 64  |  2Tb | 02  | dide
 
 ## Usage of whole machine:
 
 |                      | Total     | VM allocated | Spare |
 |----------------------|-----------|--------------|-------|
-| Cores (logical)      |    32     | 4            | 28    |
-| RAM (Gb)             |   256     | 16           | 240   |
-| DISK (E: SSD) (Tb)   |   132     | 16           | 116   |
+| Cores (logical)      |    32     | 12           | 20    |
+| RAM (Gb)             |   256     | 128          | 128   |
+| DISK (E: SSD) (Tb)   |   132     | 18           | 114   |
 
 Note:
 

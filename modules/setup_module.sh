@@ -1,6 +1,6 @@
 #!/bin/bash -eux
 
-apt-get -y install bzip2 g++ make lua5.3 pkg-config lua-posix lua-posix-dev liblua5.3.0 liblua5.3-dev tcl-dev python3-pip nfs-kernel-server
+apt-get -y install bzip2 g++ make lua5.3 pkg-config lua-posix lua-posix-dev liblua5.3.0 liblua5.3-dev tcl-dev python3-pip nfs-kernel-server python-is-python3 ubuntu-drivers-common python3-xkit
 cd ~
 git clone https://github.com/TACC/Lmod
 cd Lmod
@@ -11,12 +11,14 @@ tee -a /home/vagrant/.bashrc << EOF
 export PATH=/opt/apps/lmod/lmod/libexec:$PATH
 source /opt/apps/lmod/lmod/init/bash
 export LMOD_CMD=/opt/apps/lmod/lmod/libexec/lmod
+module use /modules/modules/all
 EOF
 
 tee -a /etc/skel/.bashrc << EOF
 export PATH=/opt/apps/lmod/lmod/libexec:$PATH
 source /opt/apps/lmod/lmod/init/bash
 export LMOD_CMD=/opt/apps/lmod/lmod/libexec/lmod
+module use .modules-share/modules/all
 EOF
 
 mkdir -p /modules
@@ -27,3 +29,6 @@ EOF
 
 systemctl start nfs-kernel-server.service
 exportfs -rav
+
+# Required for various modules
+apt-get install libibverbs-dev libssl-dev
